@@ -2,6 +2,7 @@ package com.example.termproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -22,7 +23,8 @@ public class MainActivity extends AppCompatActivity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "게임 시작", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), select_level.class);
+                startActivity(intent);
             }
         });
         exit.setOnClickListener(new View.OnClickListener() {
