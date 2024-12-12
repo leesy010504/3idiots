@@ -2,17 +2,18 @@ package com.example.termproject;
 
 import android.os.Bundle;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.FrameLayout;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-
 public class easy_stage extends AppCompatActivity {
-
     private customView customView;
-    private FrameLayout frameLayout;
     private int countAnswer = 0;
+    private View clearView;
+    private boolean[] checkAnswer = new boolean[5];
     final float[][] positionX = {   {45.f, 190.f},
                                     {275.f, 425.f},
                                     {590.f, 700.f},
@@ -29,7 +30,7 @@ public class easy_stage extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.easy_stage);
-        frameLayout = (FrameLayout) findViewById(R.id.frameLayout);
+        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.frameLayout);
         customView = new customView(this, positionX, positionY);
         frameLayout.addView(customView);
     }
@@ -44,11 +45,22 @@ public class easy_stage extends AppCompatActivity {
                 if (X >= positionX[i][0] && X <= positionX[i][1] &&
                     Y >= positionY[i][0] && Y <= positionY[i][1]) {
                     customView.setcorrectIdx(i);
-                    countAnswer++;
+                    if (!checkAnswer[i]) {
+                        countAnswer++;
+                        checkAnswer[i] = true;
+                    }
+                    if (countAnswer >= 5) {
+                        clearView = (View) View.inflate(easy_stage.this, R.layout.clear, null);
+                        AlertDialog.Builder dlg = new AlertDialog.Builder(easy_stage.this);
+                        dlg.setView(clearView);
+                        dlg.show();
+                    }
                     return super.onTouchEvent(event);
                 }
             }
             // 오답인 경우 목숨 감소 구현
+
+
 
         }
         return super.onTouchEvent(event);
