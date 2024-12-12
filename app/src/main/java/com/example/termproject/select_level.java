@@ -1,6 +1,7 @@
 package com.example.termproject;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,7 +10,7 @@ import androidx.annotation.Nullable;
 
 public class select_level extends Activity {
 
-    ImageView back_arrow, easy, medium, hard;
+    ImageView back_arrow, easy, normal, hard;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -18,7 +19,7 @@ public class select_level extends Activity {
 
         back_arrow = (ImageView) findViewById(R.id.back_arrow);
         easy = (ImageView) findViewById(R.id.easy);
-        medium = (ImageView) findViewById(R.id.medium);
+        normal = (ImageView) findViewById(R.id.normal);
         hard = (ImageView) findViewById(R.id.hard);
 
         back_arrow.setOnClickListener(new View.OnClickListener() {
@@ -27,6 +28,31 @@ public class select_level extends Activity {
                 finish();
             }
         });
+
+        easy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), easy_stage.class);
+                startActivity(intent);
+            }
+        });
+
+        normal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), normal_stage.class);
+                startActivity(intent);
+            }
+        });
+        hard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), hard_stage.class);
+                startActivity(intent);
+            }
+        });
+
+
 
     }
 }
