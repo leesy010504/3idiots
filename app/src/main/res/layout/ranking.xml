@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/clearView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_margin="10dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:layout_weight="1">
+            <ImageView
+                android:id="@+id/back_arrow_ranking"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/back_arrow"/>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:src="@drawable/ranking"/>
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:layout_weight="1">
+            <ImageView
+                android:layout_width="0dp"
+                android:src="@drawable/first"
+                android:layout_weight="1"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:textSize="40sp"
+                android:text="Blank"/>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:layout_weight="1">
+            <ImageView
+                android:layout_width="0dp"
+                android:src="@drawable/second"
+                android:layout_weight="1"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:textSize="40sp"
+                android:text="Blank"/>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:layout_weight="1">
+            <ImageView
+                android:layout_width="0dp"
+                android:src="@drawable/third"
+                android:layout_weight="1"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:textSize="40sp"
+                android:text="Blank"/>
+        </TableRow>
+
+    </TableLayout>
+
+
+
+
+
+
+
+
+</LinearLayout>

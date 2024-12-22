@@ -1,8 +1,11 @@
 package com.example.termproject;
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import androidx.annotation.Nullable;
@@ -10,6 +13,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.CountDownTimer;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -107,6 +111,33 @@ public class easy_stage extends AppCompatActivity {
 
     private void checkGameOver() {
         if (lives <= 0) {
+            Dialog failView = new Dialog(this);
+            failView.setContentView(R.layout.fail);
+
+            ImageView btnMain = (ImageView) failView.findViewById(R.id.btnMain);
+            ImageView btnRestart = (ImageView) failView.findViewById(R.id.btnRestart);
+
+            btnMain.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
+            });
+
+            btnRestart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getApplicationContext(), easy_stage.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+
+            failView.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            failView.show();
+
             // 씬 전환시 이용
             Toast.makeText(easy_stage.this, "게임 오버! 다시 도전하세요!", Toast.LENGTH_LONG).show();
 

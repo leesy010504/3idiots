@@ -6,11 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageView start, exit;
+    ImageView start, ranking, exit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,12 +19,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         start = (ImageView) findViewById(R.id.start);
+        ranking = (ImageView) findViewById(R.id.ranking);
         exit = (ImageView) findViewById(R.id.exit);
 
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), select_level.class);
+                startActivity(intent);
+            }
+        });
+        ranking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ranking.class);
                 startActivity(intent);
             }
         });

@@ -25,6 +25,7 @@
         <activity android:name=".easy_stage" android:label="easy_stage"/>
         <activity android:name=".normal_stage" android:label="normal_stage"/>
         <activity android:name=".hard_stage" android:label="hard_stage"/>
+        <activity android:name=".ranking" android:label="ranking"/>
     </application>
 
 </manifest>
