@@ -9,10 +9,18 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.widget.TextView;
+import android.os.CountDownTimer;
+import android.widget.Toast;
+
 public class hard_stage extends AppCompatActivity {
     private customView customView;
     private int countAnswer = 0;
     private View clearView;
+    private int lives = 1; //하드 스테이지 목숨
+    private long timeleft = 30 * 1000; //하드 스테이지 타이머 60초
+    private TextView timerTextView, livesTextView;
+    private CountDownTimer timer;
     private boolean[] checkAnswer = new boolean[5];
     final float[][] positionX = {   {340.f, 480.f},
                                     {820.f, 970.f},
@@ -33,10 +41,33 @@ public class hard_stage extends AppCompatActivity {
         FrameLayout frameLayout = (FrameLayout) findViewById(R.id.frameLayout);
         customView = new customView(this, positionX, positionY);
         frameLayout.addView(customView);
+
+        timerTextView = findViewById(R.id.timerTextView);
+        livesTextView = findViewById(R.id.livesTextView);
+
+        livesTextView.setText("목숨: " + lives);
+        timer = new CountDownTimer(timeleft, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timeleft = millisUntilFinished;
+                timerTextView.setText("타이머: " + timeleft / 1000 + "초");
+            }
+
+            @Override
+            public void onFinish() {
+                // 타이머가 0이 되면 게임 종료
+                lives = 0;
+                checkGameOver();
+            }
+        };
+        timer.start();
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if (lives == 0) {
+            return false;
+        }
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             float X = event.getX();
             float Y = event.getY();
@@ -61,12 +92,32 @@ public class hard_stage extends AppCompatActivity {
                     return super.onTouchEvent(event);
                 }
             }
-            // 오답인 경우 목숨 감소 구현
-
-
+            lives--;
+            livesTextView.setText("목숨: " + lives);
+            checkGameOver(); // 목숨이 0인지 확인
 
         }
         return super.onTouchEvent(event);
+    }
+
+    private void checkGameOver() {
+        if (lives <= 0) {
+            // 씬 전환시 이용
+            Toast.makeText(hard_stage.this, "게임 오버! 다시 도전하세요!", Toast.LENGTH_LONG).show();
+
+            // 타이머 중지
+            if (timer != null) {
+                timer.cancel();
+            }
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (timer != null) {
+            timer.cancel(); // 액티비티 종료 시 타이머 중지
+        }
     }
 
 }
