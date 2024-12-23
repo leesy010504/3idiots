@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.CountDownTimer;
@@ -96,7 +95,7 @@ public class easy_stage extends AppCompatActivity {
                         timer.cancel(); // 타이머 중지
 
                         // ClearActivity로 클리어 시간 전달
-                        Intent intent = new Intent(this, ClearActivity.class);
+                        Intent intent = new Intent(this, easyClearActivity.class);
                         intent.putExtra("clear_time", clearTimeInSeconds);
                         startActivity(intent);
                         finish(); // 현재 액티비티 종료
