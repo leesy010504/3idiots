@@ -16,11 +16,24 @@ public class ranking extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ranking);
 
+        BgmManager.getInstance().start(this);
+
         backArrow = (ImageView) findViewById(R.id.back_arrow_ranking);
 
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { finish(); }
         });
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        BgmManager.getInstance().pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        BgmManager.getInstance().resume();
     }
 }
