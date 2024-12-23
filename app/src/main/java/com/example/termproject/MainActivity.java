@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
         ranking = (ImageView) findViewById(R.id.ranking);
         exit = (ImageView) findViewById(R.id.exit);
 
+        BgmManager.getInstance().start(this);
+
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,10 +46,16 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        BgmManager.getInstance().pause();
+    }
 
-
-
-
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        BgmManager.getInstance().resume();
+    }
 
 }

@@ -35,6 +35,9 @@ public class ranking extends AppCompatActivity {
         TextView firstRankText = findViewById(R.id.firstRankText);
         TextView secondRankText = findViewById(R.id.secondRankText);
         TextView thirdRankText = findViewById(R.id.thirdRankText);
+        BgmManager.getInstance().start(this);
+
+        backArrow = (ImageView) findViewById(R.id.back_arrow_ranking);
 
         // 기본값으로 모든 TextView를 "Blank"로 설정
         firstRankText.setText("Blank");
@@ -79,5 +82,16 @@ public class ranking extends AppCompatActivity {
             dbHelper.close();
         }
         super.onDestroy();
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        BgmManager.getInstance().pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        BgmManager.getInstance().resume();
     }
 }

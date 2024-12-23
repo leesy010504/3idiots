@@ -53,6 +53,9 @@ public class easy_stage extends AppCompatActivity {
         livesTextView = findViewById(R.id.livesTextView);
 
         livesTextView.setText("목숨: " + lives);
+
+        BgmManager.getInstance().start(this);
+
         timer = new CountDownTimer(timeleft, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -144,6 +147,18 @@ public class easy_stage extends AppCompatActivity {
     }
 
     // ... 나머지 코드는 동일 ...
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        BgmManager.getInstance().pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        BgmManager.getInstance().resume();
+    }
 
     @Override
     protected void onDestroy() {
