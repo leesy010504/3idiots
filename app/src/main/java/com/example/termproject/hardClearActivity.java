@@ -66,6 +66,18 @@ public class hardClearActivity extends AppCompatActivity {
                 rankings.get(2).getNickname() + " (" + rankings.get(2).getClearTime() + "초)" : "Blank");
     }
 
+    protected void onPause() {
+        super.onPause();
+        BgmManager.getInstance().pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        BgmManager.getInstance().resume();
+    }
+
+
     @Override
     protected void onDestroy() {
         dbHelper.close();
