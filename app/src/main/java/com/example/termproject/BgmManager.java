@@ -43,11 +43,4 @@ public class BgmManager {
         }
     }
 
-    public void stop() {
-        if (mediaPlayer != null) {
-            mediaPlayer.stop();
-            mediaPlayer.release();
-            mediaPlayer = null;
-        }
-    }
 }
