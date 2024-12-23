@@ -30,6 +30,8 @@ public class ClearActivity extends AppCompatActivity {
         EditText nicknameInput = findViewById(R.id.nicknameInput);
         ImageView enterButton = findViewById(R.id.enterButton);
 
+        BgmManager.getInstance().start(this);
+
         updateRankings();
 
         enterButton.setOnClickListener(v -> {
