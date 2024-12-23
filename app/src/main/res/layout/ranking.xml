@@ -42,6 +42,7 @@
                 android:src="@drawable/first"
                 android:layout_weight="1"/>
             <TextView
+                android:id="@+id/firstRankText"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
@@ -59,6 +60,7 @@
                 android:src="@drawable/second"
                 android:layout_weight="1"/>
             <TextView
+                android:id="@+id/secondRankText"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
@@ -76,6 +78,7 @@
                 android:src="@drawable/third"
                 android:layout_weight="1"/>
             <TextView
+                android:id="@+id/thirdRankText"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
