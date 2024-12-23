@@ -57,7 +57,7 @@
             android:layout_weight="1">
             <ImageView
                 android:layout_width="0dp"
-                android:src="@drawable/second"
+                android:src="@drawable/first"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/secondRankText"
@@ -75,7 +75,7 @@
             android:layout_weight="1">
             <ImageView
                 android:layout_width="0dp"
-                android:src="@drawable/third"
+                android:src="@drawable/first"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/thirdRankText"

@@ -91,7 +91,7 @@ public class normal_stage extends AppCompatActivity {
                         int clearTimeInSeconds = (int)(timeleft / 1000);
                         timer.cancel();
 
-                        Intent intent = new Intent(this, ClearActivity.class);
+                        Intent intent = new Intent(this, normalClearActivity.class);
                         intent.putExtra("clear_time", clearTimeInSeconds);
                         startActivity(intent);
                         finish();

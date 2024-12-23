@@ -24,55 +24,53 @@ public class ranking extends AppCompatActivity {
         backArrow = findViewById(R.id.back_arrow_ranking);
 
         backArrow.setOnClickListener(view -> finish());
+        BgmManager.getInstance().start(this);
 
         // 랭킹 표시 업데이트
         updateRankings();
     }
 
     private void updateRankings() {
-        List<RankingDBHelper.Ranking> rankings = dbHelper.getTop3Rankings();
+        // 각 난이도별 랭킹 가져오기
+        List<RankingDBHelper.Ranking> easyRankings = dbHelper.getTop3Rankings("EASY");
+        List<RankingDBHelper.Ranking> normalRankings = dbHelper.getTop3Rankings("NORMAL");
+        List<RankingDBHelper.Ranking> hardRankings = dbHelper.getTop3Rankings("HARD");
 
-        TextView firstRankText = findViewById(R.id.firstRankText);
-        TextView secondRankText = findViewById(R.id.secondRankText);
-        TextView thirdRankText = findViewById(R.id.thirdRankText);
-        BgmManager.getInstance().start(this);
-
-        backArrow = (ImageView) findViewById(R.id.back_arrow_ranking);
+        TextView firstRankText = findViewById(R.id.firstRankText);   // Easy 1등
+        TextView secondRankText = findViewById(R.id.secondRankText); // Normal 1등
+        TextView thirdRankText = findViewById(R.id.thirdRankText);   // Hard 1등
 
         // 기본값으로 모든 TextView를 "Blank"로 설정
-        firstRankText.setText("Blank");
-        secondRankText.setText("Blank");
-        thirdRankText.setText("Blank");
+        firstRankText.setText("Easy Mode: Blank");
+        secondRankText.setText("Normal Mode: Blank");
+        thirdRankText.setText("Hard Mode: Blank");
 
-        // 존재하는 랭킹 데이터만 표시
         try {
-            if (rankings != null && !rankings.isEmpty()) {
-                // 첫 번째 랭킹이 있으면 표시
-                if (rankings.size() >= 1) {
-                    RankingDBHelper.Ranking first = rankings.get(0);
-                    firstRankText.setText(String.format("%s (%d초)",
-                            first.getNickname(), first.getClearTime()));
-                }
+            // Easy 모드 1등
+            if (easyRankings != null && !easyRankings.isEmpty()) {
+                RankingDBHelper.Ranking easyFirst = easyRankings.get(0);
+                firstRankText.setText(String.format("Easy Mode: %s (%d초)",
+                        easyFirst.getNickname(), easyFirst.getClearTime()));
+            }
 
-                // 두 번째 랭킹이 있으면 표시
-                if (rankings.size() >= 2) {
-                    RankingDBHelper.Ranking second = rankings.get(1);
-                    secondRankText.setText(String.format("%s (%d초)",
-                            second.getNickname(), second.getClearTime()));
-                }
+            // Normal 모드 1등
+            if (normalRankings != null && !normalRankings.isEmpty()) {
+                RankingDBHelper.Ranking normalFirst = normalRankings.get(0);
+                secondRankText.setText(String.format("Normal Mode: %s (%d초)",
+                        normalFirst.getNickname(), normalFirst.getClearTime()));
+            }
 
-                // 세 번째 랭킹이 있으면 표시
-                if (rankings.size() >= 3) {
-                    RankingDBHelper.Ranking third = rankings.get(2);
-                    thirdRankText.setText(String.format("%s (%d초)",
-                            third.getNickname(), third.getClearTime()));
-                }
+            // Hard 모드 1등
+            if (hardRankings != null && !hardRankings.isEmpty()) {
+                RankingDBHelper.Ranking hardFirst = hardRankings.get(0);
+                thirdRankText.setText(String.format("Hard Mode: %s (%d초)",
+                        hardFirst.getNickname(), hardFirst.getClearTime()));
             }
         } catch (Exception e) {
-            // 예외 발생 시 모든 TextView를 "Blank"로 설정
-            firstRankText.setText("Blank");
-            secondRankText.setText("Blank");
-            thirdRankText.setText("Blank");
+            // 예외 발생 시 기본값으로 설정
+            firstRankText.setText("Easy Mode: Blank");
+            secondRankText.setText("Normal Mode: Blank");
+            thirdRankText.setText("Hard Mode: Blank");
         }
     }
 
@@ -83,6 +81,7 @@ public class ranking extends AppCompatActivity {
         }
         super.onDestroy();
     }
+
     @Override
     protected void onPause() {
         super.onPause();

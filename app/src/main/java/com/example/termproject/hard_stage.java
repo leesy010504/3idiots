@@ -93,7 +93,7 @@ public class hard_stage extends AppCompatActivity {
                         timer.cancel(); // 타이머 중지
 
                         // ClearActivity로 클리어 시간 전달
-                        Intent intent = new Intent(this, ClearActivity.class);
+                        Intent intent = new Intent(this, hardClearActivity.class);
                         intent.putExtra("clear_time", clearTimeInSeconds);
                         startActivity(intent);
                         finish(); // 현재 액티비티 종료
