@@ -129,8 +129,8 @@ public class easy_stage extends AppCompatActivity {
 
             btnRestart.setOnClickListener(view -> {
                 Intent intent = new Intent(getApplicationContext(), easy_stage.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                finish();
             });
 
             failView.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);

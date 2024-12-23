@@ -122,9 +122,9 @@ public class normal_stage extends AppCompatActivity {
             });
 
             btnRestart.setOnClickListener(view -> {
-                Intent intent = new Intent(getApplicationContext(), easy_stage.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                Intent intent = new Intent(getApplicationContext(), normal_stage.class);
                 startActivity(intent);
+                finish();
             });
 
             failView.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
