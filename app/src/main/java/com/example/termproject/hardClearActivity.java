@@ -11,9 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
 
-public class ClearActivity extends AppCompatActivity {
+public class hardClearActivity extends AppCompatActivity {
     private RankingDBHelper dbHelper;
-    private static final String DIFFICULTY = "EASY";
+    private static final String DIFFICULTY = "HARD";
     private int clearTime;
 
     @Override
