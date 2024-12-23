@@ -41,36 +41,36 @@ public class ranking extends AppCompatActivity {
         TextView thirdRankText = findViewById(R.id.thirdRankText);   // Hard 1등
 
         // 기본값으로 모든 TextView를 "Blank"로 설정
-        firstRankText.setText("Easy Mode: Blank");
-        secondRankText.setText("Normal Mode: Blank");
-        thirdRankText.setText("Hard Mode: Blank");
+        firstRankText.setText("Easy Mode:\n Blank");
+        secondRankText.setText("Normal Mode:\n Blank");
+        thirdRankText.setText("Hard Mode:\n Blank");
 
         try {
             // Easy 모드 1등
             if (easyRankings != null && !easyRankings.isEmpty()) {
                 RankingDBHelper.Ranking easyFirst = easyRankings.get(0);
-                firstRankText.setText(String.format("Easy Mode: %s (%d초)",
+                firstRankText.setText(String.format("Easy Mode:\n %s (%d초)",
                         easyFirst.getNickname(), easyFirst.getClearTime()));
             }
 
             // Normal 모드 1등
             if (normalRankings != null && !normalRankings.isEmpty()) {
                 RankingDBHelper.Ranking normalFirst = normalRankings.get(0);
-                secondRankText.setText(String.format("Normal Mode: %s (%d초)",
+                secondRankText.setText(String.format("Normal Mode:\n %s (%d초)",
                         normalFirst.getNickname(), normalFirst.getClearTime()));
             }
 
             // Hard 모드 1등
             if (hardRankings != null && !hardRankings.isEmpty()) {
                 RankingDBHelper.Ranking hardFirst = hardRankings.get(0);
-                thirdRankText.setText(String.format("Hard Mode: %s (%d초)",
+                thirdRankText.setText(String.format("Hard Mode:\n %s (%d초)",
                         hardFirst.getNickname(), hardFirst.getClearTime()));
             }
         } catch (Exception e) {
             // 예외 발생 시 기본값으로 설정
-            firstRankText.setText("Easy Mode: Blank");
-            secondRankText.setText("Normal Mode: Blank");
-            thirdRankText.setText("Hard Mode: Blank");
+            firstRankText.setText("Easy Mode:\n Blank");
+            secondRankText.setText("Normal Mode:\n Blank");
+            thirdRankText.setText("Hard Mode:\n Blank");
         }
     }
 
