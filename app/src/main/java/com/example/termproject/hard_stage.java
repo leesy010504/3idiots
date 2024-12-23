@@ -72,14 +72,12 @@ public class hard_stage extends AppCompatActivity {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (lives == 0) {
-            return false;
+            return false; // 목숨 0이면 터치 무시
         }
+
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             float X = event.getX();
             float Y = event.getY();
-
-            android.util.Log.i("좌표X", Float.toString(X));
-            android.util.Log.i("좌표Y", Float.toString(Y));
 
             for (int i = 0; i < 5; ++i) {
                 if (X >= positionX[i][0] && X <= positionX[i][1] &&
@@ -90,18 +88,23 @@ public class hard_stage extends AppCompatActivity {
                         checkAnswer[i] = true;
                     }
                     if (countAnswer >= 5) {
-                        clearView = (View) View.inflate(hard_stage.this, R.layout.clear, null);
-                        AlertDialog.Builder dlg = new AlertDialog.Builder(hard_stage.this);
-                        dlg.setView(clearView);
-                        dlg.show();
+                        // 게임 클리어 시 남은 시간을 초로 계산
+                        int clearTimeInSeconds = (int)(timeleft / 1000);
+                        timer.cancel(); // 타이머 중지
+
+                        // ClearActivity로 클리어 시간 전달
+                        Intent intent = new Intent(this, ClearActivity.class);
+                        intent.putExtra("clear_time", clearTimeInSeconds);
+                        startActivity(intent);
+                        finish(); // 현재 액티비티 종료
                     }
                     return super.onTouchEvent(event);
                 }
             }
+
             lives--;
             livesTextView.setText("목숨: " + lives);
-            checkGameOver(); // 목숨이 0인지 확인
-
+            checkGameOver();
         }
         return super.onTouchEvent(event);
     }
@@ -111,34 +114,26 @@ public class hard_stage extends AppCompatActivity {
             Dialog failView = new Dialog(this);
             failView.setContentView(R.layout.fail);
 
-            ImageView btnMain = (ImageView) failView.findViewById(R.id.btnMain);
-            ImageView btnRestart = (ImageView) failView.findViewById(R.id.btnRestart);
+            ImageView btnMain = failView.findViewById(R.id.btnMain);
+            ImageView btnRestart = failView.findViewById(R.id.btnRestart);
 
-            btnMain.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                }
+            btnMain.setOnClickListener(view -> {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             });
 
-            btnRestart.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(getApplicationContext(), hard_stage.class);
-                    startActivity(intent);
-                    finish();
-                }
+            btnRestart.setOnClickListener(view -> {
+                Intent intent = new Intent(getApplicationContext(), easy_stage.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             });
 
             failView.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             failView.show();
 
-            // 씬 전환시 이용
             Toast.makeText(hard_stage.this, "게임 오버! 다시 도전하세요!", Toast.LENGTH_LONG).show();
 
-            // 타이머 중지
             if (timer != null) {
                 timer.cancel();
             }
