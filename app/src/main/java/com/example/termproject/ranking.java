@@ -24,7 +24,6 @@ public class ranking extends AppCompatActivity {
         backArrow = findViewById(R.id.back_arrow_ranking);
 
         backArrow.setOnClickListener(view -> finish());
-        BgmManager.getInstance().start(this);
 
         // 랭킹 표시 업데이트
         updateRankings();

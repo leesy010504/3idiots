@@ -54,7 +54,6 @@ public class easy_stage extends AppCompatActivity {
 
         livesTextView.setText("목숨: " + lives);
 
-        BgmManager.getInstance().start(this);
 
         timer = new CountDownTimer(timeleft, 1000) {
             @Override

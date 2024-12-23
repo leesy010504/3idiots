@@ -22,8 +22,6 @@ public class select_level extends Activity {
         normal = (ImageView) findViewById(R.id.normal);
         hard = (ImageView) findViewById(R.id.hard);
 
-        BgmManager.getInstance().start(this);
-
         back_arrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
