@@ -73,8 +73,6 @@ public class easy_stage extends AppCompatActivity {
         timer.start();
     }
 
-    // ... 이전 코드는 동일 ...
-
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (lives == 0) {
@@ -145,9 +143,6 @@ public class easy_stage extends AppCompatActivity {
             }
         }
     }
-
-    // ... 나머지 코드는 동일 ...
-
     @Override
     protected void onPause() {
         super.onPause();

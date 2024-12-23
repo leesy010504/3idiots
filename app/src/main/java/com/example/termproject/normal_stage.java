@@ -71,8 +71,8 @@ public class normal_stage extends AppCompatActivity {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (lives ==0) {
-            return false; // 목숨 0이면 터치 무시
+        if (lives == 0) {
+            return false;
         }
 
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
@@ -88,10 +88,13 @@ public class normal_stage extends AppCompatActivity {
                         checkAnswer[i] = true;
                     }
                     if (countAnswer >= 5) {
-                        clearView = (View) View.inflate(normal_stage.this, R.layout.clear, null);
-                        AlertDialog.Builder dlg = new AlertDialog.Builder(normal_stage.this);
-                        dlg.setView(clearView);
-                        dlg.show();
+                        int clearTimeInSeconds = (int)(timeleft / 1000);
+                        timer.cancel();
+
+                        Intent intent = new Intent(this, ClearActivity.class);
+                        intent.putExtra("clear_time", clearTimeInSeconds);
+                        startActivity(intent);
+                        finish();
                     }
                     return super.onTouchEvent(event);
                 }
@@ -99,51 +102,42 @@ public class normal_stage extends AppCompatActivity {
 
             lives--;
             livesTextView.setText("목숨: " + lives);
-            checkGameOver(); // 목숨이 0인지 확인
-
+            checkGameOver();
         }
         return super.onTouchEvent(event);
     }
-
 
     private void checkGameOver() {
         if (lives <= 0) {
             Dialog failView = new Dialog(this);
             failView.setContentView(R.layout.fail);
 
-            ImageView btnMain = (ImageView) failView.findViewById(R.id.btnMain);
-            ImageView btnRestart = (ImageView) failView.findViewById(R.id.btnRestart);
+            ImageView btnMain = failView.findViewById(R.id.btnMain);
+            ImageView btnRestart = failView.findViewById(R.id.btnRestart);
 
-            btnMain.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                }
+            btnMain.setOnClickListener(view -> {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             });
 
-            btnRestart.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(getApplicationContext(), normal_stage.class);
-                    startActivity(intent);
-                    finish();
-                }
+            btnRestart.setOnClickListener(view -> {
+                Intent intent = new Intent(getApplicationContext(), easy_stage.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             });
 
             failView.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             failView.show();
 
-            // 씬 전환시 이용
             Toast.makeText(normal_stage.this, "게임 오버! 다시 도전하세요!", Toast.LENGTH_LONG).show();
 
-            // 타이머 중지
             if (timer != null) {
                 timer.cancel();
             }
         }
     }
+
     @Override
     protected void onPause() {
         super.onPause();
